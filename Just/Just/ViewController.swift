@@ -33,6 +33,7 @@ class ViewController: UIViewController {
         openAlertActionTouched()
     }
     
+    // 버튼 누르면 AlertAction 열림
     func openAlertActionTouched() {
         let alert =  UIAlertController(title: "사진 선택", message: "Choose Cover Image", preferredStyle: .actionSheet)
         let library =  UIAlertAction(title: "사진앨범", style: .default) {
@@ -48,6 +49,7 @@ class ViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    // AlertAction에서 Library 눌렀을 때
     func openLibraryTouched() {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             imagePicker.sourceType = .photoLibrary
@@ -55,6 +57,7 @@ class ViewController: UIViewController {
         }
     }
     
+    // AlertAction에서 Camera 눌렀을 때
     func openCameraTouched() {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             imagePicker.sourceType = .camera
