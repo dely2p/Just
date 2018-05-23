@@ -11,8 +11,7 @@ import MobileCoreServices
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var coverPixel: UILabel!
-    @IBOutlet weak var securePixel: UILabel!
+    @IBOutlet weak var sliderBar: UISlider!
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var secureImageView: UIImageView!
     var imagePicker = UIImagePickerController()
@@ -28,12 +27,19 @@ class ViewController: UIViewController {
         secureImageView.isUserInteractionEnabled = true
         secureImageView.addGestureRecognizer(secureTapGesture)
         imagePicker.delegate = self
+        sliderBar.maximumValue = 8
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+    // slider
+    @IBAction func sliderValueChanged(_ sender: UISlider) {
+        print(Int(sender.value))
+    }
+    
+
     // imageView 누르면 AlertAction 열림
     @objc func openAlertActionTouched(tapGestureRecognizer: UITapGestureRecognizer) {
         print("imageView clicked")
