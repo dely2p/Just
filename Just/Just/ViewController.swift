@@ -11,13 +11,20 @@ import MobileCoreServices
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var CoverImageView: UIImageView!
-    @IBOutlet weak var SecureImageView: UIImageView!
+    @IBOutlet weak var coverImageView: UIImageView!
+    @IBOutlet weak var secureImageView: UIImageView!
     var imagePicker = UIImagePickerController()
     var flagOfImageView = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let coverTapGesture = UITapGestureRecognizer(target: self, action: #selector(openAlertActionTouched(tapGestureRecognizer:)))
+        let secureTapGesture = UITapGestureRecognizer(target: self, action: #selector(openAlertActionTouched(tapGestureRecognizer:)))
+        coverImageView.isUserInteractionEnabled = true
+        coverImageView.addGestureRecognizer(coverTapGesture)
+        secureImageView.isUserInteractionEnabled = true
+        secureImageView.addGestureRecognizer(secureTapGesture)
         imagePicker.delegate = self
     }
 
@@ -25,16 +32,9 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    @IBAction func selectCoverButton(_ sender: UIButton) {
-        openAlertActionTouched()
-    }
-
-    @IBAction func selectSecureButton(_ sender: UIButton) {
-        openAlertActionTouched()
-    }
-    
-    // 버튼 누르면 AlertAction 열림
-    func openAlertActionTouched() {
+    // imageView 누르면 AlertAction 열림
+    @objc func openAlertActionTouched(tapGestureRecognizer: UITapGestureRecognizer) {
+        print("imageView clicked")
         let alert =  UIAlertController(title: "사진 선택", message: "Choose Cover Image", preferredStyle: .actionSheet)
         let library =  UIAlertAction(title: "사진앨범", style: .default) {
             action in self.openLibraryTouched()
@@ -74,14 +74,13 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
             return
         }
         if !flagOfImageView {
-            CoverImageView.image = image
+            coverImageView.image = image
             flagOfImageView = true
         } else {
-            SecureImageView.image = image
+            secureImageView.image = image
             flagOfImageView = true
         }
         dismiss(animated: true, completion: nil)
     }
-
 }
 
