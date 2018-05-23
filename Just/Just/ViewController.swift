@@ -11,6 +11,8 @@ import MobileCoreServices
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var coverPixel: UILabel!
+    @IBOutlet weak var securePixel: UILabel!
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var secureImageView: UIImageView!
     var imagePicker = UIImagePickerController()
@@ -80,7 +82,38 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
             secureImageView.image = image
             flagOfImageView = true
         }
+        
+        // pixel data 2진수로 표현
+        let size = CGSize(width: 10, height: 10)
+        let pixelData = image.cgImage?.dataProvider?.data
+        let data: UnsafePointer<UInt8> = CFDataGetBytePtr(pixelData)
+        let position = CGPoint(x: 1, y: 1)
+        let pixelInfo: Int = ((Int(size.width) * Int(position.y)) + Int(position.x)) * 4
+        
+        let r = String(Int(CGFloat(data[pixelInfo])), radix: 2)
+        let g = String(Int(CGFloat(data[pixelInfo+1])), radix: 2)
+        let b = String(Int(CGFloat(data[pixelInfo+2])), radix: 2)
+        let a = String(Int(CGFloat(data[pixelInfo+3])), radix: 2)
+        print("r: \(r)", "g: \(g)", "b: \(b)", "a: \(a)")
+        
         dismiss(animated: true, completion: nil)
     }
 }
+
+//extension UIImage {
+//    func getPixelColor(pos: CGPoint) -> UIColor {
+//
+//        let pixelData = CGDataProvider(data: CGImageGetDataProvider(self.CGImage!) as! CFData)
+//        let data: UnsafePointer<UInt8> = CFDataGetBytePtr(pixelData)
+//
+//        let pixelInfo: Int = ((Int(self.size.width) * Int(pos.y)) + Int(pos.x)) * 4
+//
+//        let r = CGFloat(data[pixelInfo]) / CGFloat(255.0)
+//        let g = CGFloat(data[pixelInfo+1]) / CGFloat(255.0)
+//        let b = CGFloat(data[pixelInfo+2]) / CGFloat(255.0)
+//        let a = CGFloat(data[pixelInfo+3]) / CGFloat(255.0)
+//
+//        return UIColor(red: r, green: g, blue: b, alpha: a)
+//    }
+//}
 
