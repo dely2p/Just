@@ -9,12 +9,20 @@
 import Foundation
 
 class RGBData {
-    var r: Int8
-    var g: Int8
-    var b: Int8
-    init(r: String, g: String, b: String) {
-        self.r = Int8(r)!
-        self.g = Int8(g)!
-        self.b = Int8(b)!
+    var r: CFBit
+    var g: CFBit
+    var b: CFBit
+    var a: CFBit
+    init(r: String, g: String, b: String, a: String) {
+        self.r = CFBit(r)!
+        self.g = CFBit(g)!
+        self.b = CFBit(b)!
+        self.a = CFBit(a)!
+    }
+    init(r: CFBit, g: CFBit, b: CFBit, a: CFBit) {
+        self.r = r
+        self.g = g
+        self.b = b
+        self.a = a
     }
 }

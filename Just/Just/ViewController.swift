@@ -14,8 +14,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var sliderBar: UISlider!
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var secureImageView: UIImageView!
-    var imagePicker = UIImagePickerController()
-    var flagOfImageView = false
+    private var imagePicker = UIImagePickerController()
+    private var flagOfImageView = false
+    private var coverImagePixel: [RGBData]!
+    private var secureImagePixel: [RGBData]!
+    let rgbPixelMaker = RGBPixelMaker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +42,11 @@ class ViewController: UIViewController {
         print(Int(sender.value))
         let bit = Int(sender.value)
         
+        // 픽셀 별로 해당 비트만큼 치환
+        let resultImage = rgbPixelMaker.makebitMixing(imageA: coverImagePixel, imageB: secureImagePixel, bit: 1)
         
+        // coverimageView에 result 넣기
+        coverImageView.image = rgbPixelMaker.makeMixingImage(data: resultImage)
     }
     
 
@@ -86,34 +93,22 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
         }
         if !flagOfImageView {
             coverImageView.image = image
-            flagOfImageView = true
+            
         } else {
             secureImageView.image = image
-            flagOfImageView = true
+            
         }
-        
-        // pixel data 2진수로 표현
-        let rgbPixelMaker = RGBPixelMaker()
-        rgbPixelMaker.makeBinaryPixel(image: image)
-        
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: imagePickerDidEnd)
     }
+    
+    func imagePickerDidEnd() {
+        if !flagOfImageView {
+            coverImagePixel = rgbPixelMaker.makeBinaryPixel(image: coverImageView.image!)
+            flagOfImageView = true
+        } else {
+            secureImagePixel = rgbPixelMaker.makeBinaryPixel(image: secureImageView.image!)
+            flagOfImageView = false
+        }
+    }
+
 }
-
-//extension UIImage {
-//    func getPixelColor(pos: CGPoint) -> UIColor {
-//
-//        let pixelData = CGDataProvider(data: CGImageGetDataProvider(self.CGImage!) as! CFData)
-//        let data: UnsafePointer<UInt8> = CFDataGetBytePtr(pixelData)
-//
-//        let pixelInfo: Int = ((Int(self.size.width) * Int(pos.y)) + Int(pos.x)) * 4
-//
-//        let r = CGFloat(data[pixelInfo]) / CGFloat(255.0)
-//        let g = CGFloat(data[pixelInfo+1]) / CGFloat(255.0)
-//        let b = CGFloat(data[pixelInfo+2]) / CGFloat(255.0)
-//        let a = CGFloat(data[pixelInfo+3]) / CGFloat(255.0)
-//
-//        return UIColor(red: r, green: g, blue: b, alpha: a)
-//    }
-//}
-
