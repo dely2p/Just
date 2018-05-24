@@ -37,6 +37,9 @@ class ViewController: UIViewController {
     // slider
     @IBAction func sliderValueChanged(_ sender: UISlider) {
         print(Int(sender.value))
+        let bit = Int(sender.value)
+        
+        
     }
     
 
@@ -90,17 +93,8 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
         }
         
         // pixel data 2진수로 표현
-        let size = CGSize(width: 10, height: 10)
-        let pixelData = image.cgImage?.dataProvider?.data
-        let data: UnsafePointer<UInt8> = CFDataGetBytePtr(pixelData)
-        let position = CGPoint(x: 1, y: 1)
-        let pixelInfo: Int = ((Int(size.width) * Int(position.y)) + Int(position.x)) * 4
-        
-        let r = String(Int(CGFloat(data[pixelInfo])), radix: 2)
-        let g = String(Int(CGFloat(data[pixelInfo+1])), radix: 2)
-        let b = String(Int(CGFloat(data[pixelInfo+2])), radix: 2)
-        let a = String(Int(CGFloat(data[pixelInfo+3])), radix: 2)
-        print("r: \(r)", "g: \(g)", "b: \(b)", "a: \(a)")
+        let rgbPixelMaker = RGBPixelMaker()
+        rgbPixelMaker.makeBinaryPixel(image: image)
         
         dismiss(animated: true, completion: nil)
     }
