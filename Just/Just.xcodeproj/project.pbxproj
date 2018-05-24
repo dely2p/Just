@@ -16,6 +16,7 @@
 		A32CB8AF20ABDE2500D19F57 /* JustUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CB8AE20ABDE2500D19F57 /* JustUITests.swift */; };
 		A32CB8BD20AC695C00D19F57 /* PWViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CB8BC20AC695C00D19F57 /* PWViewController.swift */; };
 		A34F91CA20B6A00600961507 /* RGBPixelMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34F91C920B6A00600961507 /* RGBPixelMaker.swift */; };
+		A34F91CC20B6A2C000961507 /* RGBData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34F91CB20B6A2C000961507 /* RGBData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		A32CB8B020ABDE2500D19F57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A32CB8BC20AC695C00D19F57 /* PWViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWViewController.swift; sourceTree = "<group>"; };
 		A34F91C920B6A00600961507 /* RGBPixelMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGBPixelMaker.swift; sourceTree = "<group>"; };
+		A34F91CB20B6A2C000961507 /* RGBData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGBData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				A32CB89A20ABDE2500D19F57 /* Info.plist */,
 				A32CB8BC20AC695C00D19F57 /* PWViewController.swift */,
 				A34F91C920B6A00600961507 /* RGBPixelMaker.swift */,
+				A34F91CB20B6A2C000961507 /* RGBData.swift */,
 			);
 			path = Just;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A32CB89120ABDE2400D19F57 /* ViewController.swift in Sources */,
+				A34F91CC20B6A2C000961507 /* RGBData.swift in Sources */,
 				A32CB88F20ABDE2400D19F57 /* AppDelegate.swift in Sources */,
 				A32CB8BD20AC695C00D19F57 /* PWViewController.swift in Sources */,
 				A34F91CA20B6A00600961507 /* RGBPixelMaker.swift in Sources */,

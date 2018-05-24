@@ -10,7 +10,7 @@ import UIKit
 
 class RGBPixelMaker {
     
-    func makeBinaryPixel(image: UIImage) {
+    func makeBinaryPixel(image: UIImage) -> RGBData {
         let size = CGSize(width: 10, height: 10)
         let pixelData = image.cgImage?.dataProvider?.data
         let data: UnsafePointer<UInt8> = CFDataGetBytePtr(pixelData)
@@ -20,7 +20,7 @@ class RGBPixelMaker {
         let r = String(Int(CGFloat(data[pixelInfo])), radix: 2)
         let g = String(Int(CGFloat(data[pixelInfo+1])), radix: 2)
         let b = String(Int(CGFloat(data[pixelInfo+2])), radix: 2)
-        let a = String(Int(CGFloat(data[pixelInfo+3])), radix: 2)
-        print("r: \(r)", "g: \(g)", "b: \(b)", "a: \(a)")
+        
+        return RGBData.init(r: r, g: g, b: b)
     }
 }
