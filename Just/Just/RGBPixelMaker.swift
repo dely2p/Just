@@ -36,7 +36,8 @@ class RGBPixelMaker {
     }
     
     func printByFormat(_ value: UInt8) -> String {
-        return String(value, radix: 2).padding(toLength: 8, withPad: "0", startingAt: 0)
+        var binaryValue = String(value, radix: 2)
+        return binaryValue.pad()
     }
     
     func makebitMixing(imageA: [RGBData], imageB: [RGBData], bit: Int) -> [RGBData] {
@@ -73,5 +74,17 @@ class RGBPixelMaker {
         let render: CGColorRenderingIntent = CGColorRenderingIntent.defaultIntent
         image = UIImage(cgImage: CGImage(width: Int(size.width), height: Int(size.height), bitsPerComponent: 8, bitsPerPixel: 32, bytesPerRow: Int(size.width) * elmentLength, space: rgbColorSpace, bitmapInfo: bitmapInfo, provider: providerRef!, decode: nil, shouldInterpolate: true, intent: render)!)
         return image
+    }
+}
+
+extension String {
+    mutating func pad() -> String {
+        let size = 8 - self.count
+        var padding = ""
+        for _ in 0..<size {
+            padding += "0"
+        }
+        self = padding + self
+        return self
     }
 }
