@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Just/ViewController.swift"
-            timestampString = "549194149.408741"
+            timestampString = "549197423.332284"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "46"
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Just/RGBPixelMaker.swift"
-            timestampString = "549194149.408832"
+            timestampString = "549197423.332371"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "makebitMixing(imageA:imageB:bit:)"
             landmarkType = "7">
          </BreakpointContent>

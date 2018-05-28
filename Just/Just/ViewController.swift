@@ -43,7 +43,7 @@ class ViewController: UIViewController {
         let bit = Int(sender.value)
         
         // 픽셀 별로 해당 비트만큼 치환
-        let resultImage = rgbPixelMaker.makebitMixing(imageA: coverImagePixel, imageB: secureImagePixel, bit: 1)
+        let resultImage = rgbPixelMaker.makebitMixing(imageA: coverImagePixel, imageB: secureImagePixel, bit: 5)
         
         // coverimageView에 result 넣기
         coverImageView.image = rgbPixelMaker.makeMixingImage(data: resultImage)
