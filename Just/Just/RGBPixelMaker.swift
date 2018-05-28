@@ -59,7 +59,7 @@ class RGBPixelMaker {
             if index == 0 {
                 print("imageBShifted: \(imageBShifted)")
                 print("shiftBitMask: \(printByFormat(shiftBitMask)), imageAMasked: \(printByFormat(imageAMasked)), imageBShifted: \(printByFormat(imageBShifted))")
-                print("tmp: \(tmp), r: \(resultR), g: \(resultG), b: \(resultB), a: \(resultA)")
+                print("tmp: \(printByFormat(tmp)), r: \(printByFormat(resultR)), g: \(printByFormat(resultG)), b: \(printByFormat(resultB)), a: \(printByFormat(resultA))")
             }
         }
         return imageOfMixing
