@@ -43,10 +43,12 @@ class ViewController: UIViewController {
         let bit = Int(sender.value)
         
         // 픽셀 별로 해당 비트만큼 치환
-        let resultImage = rgbPixelMaker.makebitMixing(imageA: coverImagePixel, imageB: secureImagePixel, bit: 5)
-        
+        let resultImage = rgbPixelMaker.makebitMixing(imageA: coverImagePixel, imageB: secureImagePixel, bit: bit)
+        rgbPixelMaker.printImagefirstByte(coverImagePixel)
+        rgbPixelMaker.printImagefirstByte(secureImagePixel)
         // coverimageView에 result 넣기
         coverImageView.image = rgbPixelMaker.makeMixingImage(rgbData: resultImage, coverImage: coverImageView.image!)
+        rgbPixelMaker.printImagefirstByte(resultImage)
     }
     
 
@@ -106,9 +108,11 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
         if !flagOfImageView {
             coverImagePixel = rgbPixelMaker.makeBinaryPixel(image: coverImageView.image!)
             flagOfImageView = true
+            print("cover")
         } else {
             secureImagePixel = rgbPixelMaker.makeBinaryPixel(image: secureImageView.image!)
             flagOfImageView = false
+            print("secure")
         }
     }
 
