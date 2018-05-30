@@ -65,15 +65,41 @@ class RGBPixelMaker {
         return imageOfMixing
     }
     
-    func makeMixingImage(data: [RGBData]) -> UIImage {
-        let image: UIImage!
-        let elmentLength: Int = 32
-        let rgbColorSpace = CGColorSpaceCreateDeviceRGB()
-        let bitmapInfo: CGBitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedFirst.rawValue)
-        let providerRef: CGDataProvider? = CGDataProvider(data: NSData(bytes: data, length: data.count * elmentLength))
-        let render: CGColorRenderingIntent = CGColorRenderingIntent.defaultIntent
-        image = UIImage(cgImage: CGImage(width: Int(size.width), height: Int(size.height), bitsPerComponent: 8, bitsPerPixel: 32, bytesPerRow: Int(size.width) * elmentLength, space: rgbColorSpace, bitmapInfo: bitmapInfo, provider: providerRef!, decode: nil, shouldInterpolate: true, intent: render)!)
-        return image
+    func makeMixingImage(rgbData: [RGBData], coverImage: UIImage) -> UIImage {
+        let cgImage: CGImage?
+        let width = Int(size.width)
+        let height = Int(size.height)
+        let bitsPerComponent = 32
+        let bytesPerRow = width * bitsPerComponent
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        
+        let pixelsOfMixingImage = makeRGBAPixel(rgbData: rgbData)
+        let data: UnsafeMutableRawPointer = UnsafeMutableRawPointer(mutating: pixelsOfMixingImage)
+        
+        guard let bitmapContext = CGContext(data: data,
+                                            width: width,
+                                            height: height,
+                                            bitsPerComponent: Int(bitsPerComponent),
+                                            bytesPerRow: Int(bytesPerRow),
+                                            space: colorSpace,
+                                            bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue) else {
+            return coverImage
+        }
+        guard let image = bitmapContext.makeImage() else {
+            return coverImage
+        }
+        cgImage = image
+        
+        return UIImage(cgImage: cgImage!)
+    }
+    
+    func makeRGBAPixel(rgbData: [RGBData]) -> [UInt32] {
+        var pixelsOfMixingImage: [UInt32] = []
+        for data in rgbData {
+            let mixingImage: UInt32 = UInt32(UInt32(data.r)<<24 | UInt32(data.g)<<16 | UInt32(data.b)<<8 | UInt32(data.a))
+            pixelsOfMixingImage.append(mixingImage)
+        }
+        return pixelsOfMixingImage
     }
 }
 

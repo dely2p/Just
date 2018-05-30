@@ -9,29 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Just/ViewController.swift"
-            timestampString = "549200457.577933"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "sliderValueChanged(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Just/RGBPixelMaker.swift"
-            timestampString = "549200457.578389"
+            timestampString = "549401657.017135"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "makebitMixing(imageA:imageB:bit:)"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "makeMixingImage(rgbData:coverImage:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -46,7 +46,7 @@ class ViewController: UIViewController {
         let resultImage = rgbPixelMaker.makebitMixing(imageA: coverImagePixel, imageB: secureImagePixel, bit: 5)
         
         // coverimageView에 result 넣기
-        coverImageView.image = rgbPixelMaker.makeMixingImage(data: resultImage)
+        coverImageView.image = rgbPixelMaker.makeMixingImage(rgbData: resultImage, coverImage: coverImageView.image!)
     }
     
 
@@ -87,7 +87,8 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    // imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]
+    @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else {
             return
         }
