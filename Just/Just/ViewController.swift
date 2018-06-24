@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var sliderBar: UISlider!
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var secureImageView: UIImageView!
+    @IBOutlet weak var resultImageView: UIImageView!
+    
     private var imagePicker = UIImagePickerController()
     private var flagOfImageView = false
     private var coverImagePixel: [RGBData]!
@@ -44,11 +46,11 @@ class ViewController: UIViewController {
         
         // 픽셀 별로 해당 비트만큼 치환
         let resultImage = rgbPixelMaker.makebitMixing(imageA: coverImagePixel, imageB: secureImagePixel, bit: bit)
-        rgbPixelMaker.printImagefirstByte(coverImagePixel)
-        rgbPixelMaker.printImagefirstByte(secureImagePixel)
+        //rgbPixelMaker.printImagefirstByte(coverImagePixel)
+        //rgbPixelMaker.printImagefirstByte(secureImagePixel)
         // coverimageView에 result 넣기
-        coverImageView.image = rgbPixelMaker.makeMixingImage(rgbData: resultImage, coverImage: coverImageView.image!)
-        rgbPixelMaker.printImagefirstByte(resultImage)
+        resultImageView.image = rgbPixelMaker.makeMixingImage(rgbData: resultImage, coverImage: coverImageView.image!)
+        //rgbPixelMaker.printImagefirstByte(resultImage)
     }
     
 

@@ -17,8 +17,8 @@ class RGBPixelMaker {
         let data: UnsafePointer<UInt8> = CFDataGetBytePtr(pixelData)
         
         // from image to pixel 
-        for x in 0..<Int(size.width) {
-            for y in 0..<Int(size.height) {
+        for y in 0..<Int(size.height) {
+            for x in 0..<Int(size.width) {
                 let position = CGPoint(x: x, y: y)
                 let pixelInfo: Int = ((Int(x) * Int(position.y)) + Int(position.x)) * 4
                 
@@ -37,8 +37,8 @@ class RGBPixelMaker {
         return binaryValue.pad()
     }
     
-    func printImagefirstByte(_ rgbData: [RGBData]) {
-        print("r: \(printByFormat(rgbData[0].r)), g: \(printByFormat(rgbData[0].g)), b: \(printByFormat(rgbData[0].b)), a: \(printByFormat(rgbData[0].a))")
+    func printImagefirstByte(_ rgbData: [RGBData], _ index: Int) {
+        print("\(index) pixel r: \(printByFormat(rgbData[index].r)), g: \(printByFormat(rgbData[index].g)), b: \(printByFormat(rgbData[index].b)), a: \(printByFormat(rgbData[index].a))")
     }
     
     func makebitMixing(imageA: [RGBData], imageB: [RGBData], bit: Int) -> [RGBData] {
@@ -46,12 +46,22 @@ class RGBPixelMaker {
         var imageOfMixing: [RGBData] = []
         let bitMask: UInt8 = 255
         
-        for index in 0..<imageA.count {
+        // 사진 사이즈 조정하기
+        // 사진 사이즈를 지정해두고 그 사이즈에 맞게 가로 세로 이미지를 조정(늘리기)하는 게 좋을까
+        // 아님 비율만 줄이고 빈 공간을 흰색이나 검은색으로 채우는 게 좋을까
+        
+        let image = imageA.count < imageB.count ? imageA : imageB
+        for index in 0..<image.count {
             let resultR = imageA[index].r & bitMask << bit | imageB[index].r >> (8 - bit)
             let resultG = imageA[index].g & bitMask << bit | imageB[index].g >> (8 - bit)
             let resultB = imageA[index].b & bitMask << bit | imageB[index].b >> (8 - bit)
             let resultA = imageA[index].a
             imageOfMixing.append(RGBData.init(r: resultR, g: resultG, b: resultB, a: resultA))
+            if index < 1075 {
+                printImagefirstByte(imageA, index)
+                printImagefirstByte(imageB, index)
+                printImagefirstByte(imageOfMixing, index)
+            }
         }
         return imageOfMixing
     }
@@ -60,13 +70,12 @@ class RGBPixelMaker {
         let cgImage: CGImage?
         let width = Int(size.width)
         let height = Int(size.height)
-        let bitsPerComponent = 8
-        let bytePerPixel = 4
-        let bytesPerRow = width * bytePerPixel
+        let bitsPerComponent = 8 // UInt8
+        let bytePerPixel = 4 // 픽셀당 바이트?? RBGA
+        let bytesPerRow = bytePerPixel * width // 픽셀당 바이트 * 가로 = 가로 전체 바이트(846 * 4 = 3384)
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         
-        var pixelsOfMixingImage = makeRGBAPixel(rgbData: rgbData)
-        let data: UnsafeMutableRawPointer = UnsafeMutableRawPointer(mutating: pixelsOfMixingImage)
+        var pixelsOfMixingImage = makeRGBAPixel(rgbData: rgbData) //697136
         
         guard let bitmapContext = CGContext(data: &pixelsOfMixingImage,
                                             width: width,
@@ -77,7 +86,6 @@ class RGBPixelMaker {
                                             bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue) else {
             return coverImage
         }
-        
         
         guard let image = bitmapContext.makeImage() else {
             return coverImage
