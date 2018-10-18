@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A32CB88A20ABDE2400D19F57"
-               BuildableName = "Just.app"
-               BlueprintName = "Just"
-               ReferencedContainer = "container:Just.xcodeproj">
+               BuildableName = "RealityStone.app"
+               BlueprintName = "RealityStone"
+               ReferencedContainer = "container:RealityStone.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A32CB89E20ABDE2500D19F57"
-               BuildableName = "JustTests.xctest"
-               BlueprintName = "JustTests"
-               ReferencedContainer = "container:Just.xcodeproj">
+               BuildableName = "RealityStoneTests.xctest"
+               BlueprintName = "RealityStoneTests"
+               ReferencedContainer = "container:RealityStone.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A32CB8A920ABDE2500D19F57"
-               BuildableName = "JustUITests.xctest"
-               BlueprintName = "JustUITests"
-               ReferencedContainer = "container:Just.xcodeproj">
+               BuildableName = "RealityStoneUITests.xctest"
+               BlueprintName = "RealityStoneUITests"
+               ReferencedContainer = "container:RealityStone.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A32CB88A20ABDE2400D19F57"
-            BuildableName = "Just.app"
-            BlueprintName = "Just"
-            ReferencedContainer = "container:Just.xcodeproj">
+            BuildableName = "RealityStone.app"
+            BlueprintName = "RealityStone"
+            ReferencedContainer = "container:RealityStone.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A32CB88A20ABDE2400D19F57"
-            BuildableName = "Just.app"
-            BlueprintName = "Just"
-            ReferencedContainer = "container:Just.xcodeproj">
+            BuildableName = "RealityStone.app"
+            BlueprintName = "RealityStone"
+            ReferencedContainer = "container:RealityStone.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A32CB88A20ABDE2400D19F57"
-            BuildableName = "Just.app"
-            BlueprintName = "Just"
-            ReferencedContainer = "container:Just.xcodeproj">
+            BuildableName = "RealityStone.app"
+            BlueprintName = "RealityStone"
+            ReferencedContainer = "container:RealityStone.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
