@@ -7,11 +7,11 @@
 //
 
 import UIKit
-import MobileCoreServices
+import Metal
+import MetalKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var sliderBar: UISlider!
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var secureImageView: UIImageView!
     @IBOutlet weak var resultImageView: UIImageView!
@@ -32,7 +32,6 @@ class ViewController: UIViewController {
         secureImageView.isUserInteractionEnabled = true
         secureImageView.addGestureRecognizer(secureTapGesture)
         imagePicker.delegate = self
-        sliderBar.maximumValue = 8
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,18 +39,18 @@ class ViewController: UIViewController {
     }
     
     // slider
-    @IBAction func sliderValueChanged(_ sender: UISlider) {
-        print(Int(sender.value))
-        let bit = Int(sender.value)
-        
-        // 픽셀 별로 해당 비트만큼 치환
-        let resultImage = rgbPixelMaker.makebitMixing(imageA: coverImagePixel, imageB: secureImagePixel, bit: bit)
-        //rgbPixelMaker.printImagefirstByte(coverImagePixel)
-        //rgbPixelMaker.printImagefirstByte(secureImagePixel)
-        // coverimageView에 result 넣기
-        resultImageView.image = rgbPixelMaker.makeMixingImage(rgbData: resultImage, coverImage: coverImageView.image!)
-        //rgbPixelMaker.printImagefirstByte(resultImage)
-    }
+//    @IBAction func sliderValueChanged(_ sender: UISlider) {
+//        print(Int(sender.value))
+//        let bit = Int(sender.value)
+//
+//        // 픽셀 별로 해당 비트만큼 치환
+//        let resultImage = rgbPixelMaker.makebitMixing(imageA: coverImagePixel, imageB: secureImagePixel, bit: bit)
+//        //rgbPixelMaker.printImagefirstByte(coverImagePixel)
+//        //rgbPixelMaker.printImagefirstByte(secureImagePixel)
+//        // coverimageView에 result 넣기
+//        resultImageView.image = rgbPixelMaker.makeMixingImage(rgbData: resultImage, coverImage: coverImageView.image!)
+//        //rgbPixelMaker.printImagefirstByte(resultImage)
+//    }
     
 
     // imageView 누르면 AlertAction 열림
