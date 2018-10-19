@@ -15,6 +15,7 @@ kernel void pixelate(texture2d<float, access::read> inTexture [[texture(0)]],
                      uint2 gid [[thread_position_in_grid]]){
     
     const float4 colorAtPixel = inTexture.read(gid);
+    const float4 colorAtPixel2 = inTexture2.read(gid);
     const float4 outputColor = float4(colorAtPixel.r, colorAtPixel.g, colorAtPixel.b, 0.6);
     outTexture.write(outputColor, gid);
 }

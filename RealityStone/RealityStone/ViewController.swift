@@ -205,6 +205,8 @@ class ViewController: UIViewController {
     func openLibraryTouched() {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             imagePicker.sourceType = .photoLibrary
+            imagePicker.allowsEditing = true
+            imagePicker.delegate = self
             present(imagePicker, animated: true, completion: nil)
         }
     }
@@ -213,6 +215,8 @@ class ViewController: UIViewController {
     func openCameraTouched() {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             imagePicker.sourceType = .camera
+            imagePicker.allowsEditing = true
+            imagePicker.delegate = self
             present(imagePicker, animated: true, completion: nil)
         } else {
             print("not Available")
@@ -225,7 +229,7 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
         // Local variable inserted by Swift 4.2 migrator.
         let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
 
-        guard let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage else {
+        guard let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.editedImage)] as? UIImage else {
             return
         }
         if !flagOfImageView {
@@ -251,6 +255,23 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
     }
 
 }
+
+extension UIImage {
+    func renderResizedImage (newWidth: CGFloat) -> UIImage {
+        let scale = newWidth / self.size.width
+        let newHeight = self.size.height * scale
+        let newSize = CGSize(width: newWidth, height: newHeight)
+        
+        let renderer = UIGraphicsImageRenderer(size: newSize)
+        
+        let image = renderer.image { (context) in
+            self.draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: newSize))
+        }
+        return image
+    }
+}
+
+
 
 // Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
