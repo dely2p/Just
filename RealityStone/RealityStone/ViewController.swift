@@ -55,6 +55,7 @@ class ViewController: UIViewController {
     }()
     
     var inTexture: MTLTexture!
+    var inTexture2: MTLTexture!
     var outTexture: MTLTexture!
     let bytesPerPixel: Int = 4
     
@@ -103,7 +104,11 @@ class ViewController: UIViewController {
         guard let image = cover else {
             fatalError("Can't read image")
         }
+        guard let image2 = secure else {
+            fatalError("Can't read image")
+        }
         inTexture = texture(from: image)
+        inTexture2 = texture(from: image2)
     }
     
     func applyFilter() {
@@ -121,7 +126,8 @@ class ViewController: UIViewController {
         
         commandEncoder.setComputePipelineState(pState)
         commandEncoder.setTexture(inTexture, index: 0)
-        commandEncoder.setTexture(outTexture, index: 1)
+        commandEncoder.setTexture(inTexture2, index: 1)
+        commandEncoder.setTexture(outTexture, index: 2)
         
         commandEncoder.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
         commandEncoder.endEncoding()
