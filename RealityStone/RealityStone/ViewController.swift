@@ -13,7 +13,7 @@ import MetalKit
 class ViewController: UIViewController {
 
     var pixelSize: UInt = 60
-    var flagOfImageView = true
+    var flagOfImageView = false
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var secureImageView: UIImageView!
     @IBOutlet weak var resultImageView: UIImageView!

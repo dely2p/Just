@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A31400E02179A01F00BC6506 /* Kernels.metal in Sources */ = {isa = PBXBuildFile; fileRef = A31400DF2179A01F00BC6506 /* Kernels.metal */; };
 		A32CB88F20ABDE2400D19F57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CB88E20ABDE2400D19F57 /* AppDelegate.swift */; };
 		A32CB89120ABDE2400D19F57 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CB89020ABDE2400D19F57 /* ViewController.swift */; };
 		A32CB89420ABDE2400D19F57 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A32CB89220ABDE2400D19F57 /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A31400DF2179A01F00BC6506 /* Kernels.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Kernels.metal; sourceTree = "<group>"; };
 		A32CB88B20ABDE2400D19F57 /* RealityStone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealityStone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A32CB88E20ABDE2400D19F57 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A32CB89020ABDE2400D19F57 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				A32CB8BC20AC695C00D19F57 /* PWViewController.swift */,
 				A34F91C920B6A00600961507 /* RGBPixelMaker.swift */,
 				A34F91CB20B6A2C000961507 /* RGBData.swift */,
+				A31400DF2179A01F00BC6506 /* Kernels.metal */,
 			);
 			path = RealityStone;
 			sourceTree = "<group>";
@@ -147,6 +150,7 @@
 			files = (
 				A32CB89120ABDE2400D19F57 /* ViewController.swift in Sources */,
 				A34F91CC20B6A2C000961507 /* RGBData.swift in Sources */,
+				A31400E02179A01F00BC6506 /* Kernels.metal in Sources */,
 				A32CB88F20ABDE2400D19F57 /* AppDelegate.swift in Sources */,
 				A32CB8BD20AC695C00D19F57 /* PWViewController.swift in Sources */,
 				A34F91CA20B6A00600961507 /* RGBPixelMaker.swift in Sources */,
