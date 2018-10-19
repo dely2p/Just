@@ -61,11 +61,6 @@ class ViewController: UIViewController {
     /// A Metal compute pipeline state
     var pipelineState: MTLComputePipelineState?
     
-//    private var flagOfImageView = false
-//    private var coverImagePixel: [RGBData]!
-//    private var secureImagePixel: [RGBData]!
-//    let rgbPixelMaker = RGBPixelMaker()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -128,9 +123,6 @@ class ViewController: UIViewController {
         commandEncoder.setTexture(inTexture, index: 0)
         commandEncoder.setTexture(outTexture, index: 1)
         
-        let buffer = device.makeBuffer(bytes: &pixelSize, length: MemoryLayout<UInt>.size, options: MTLResourceOptions.storageModeShared)
-        commandEncoder.setBuffer(buffer, offset: 0, index: 0)
-        
         commandEncoder.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
         commandEncoder.endEncoding()
         
@@ -182,20 +174,6 @@ class ViewController: UIViewController {
         
         return UIImage(cgImage: dstImageFilter!, scale: 0.0, orientation: UIImage.Orientation.up)
     }
-    
-    // slider
-//    @IBAction func sliderValueChanged(_ sender: UISlider) {
-//        print(Int(sender.value))
-//        let bit = Int(sender.value)
-//
-//        // 픽셀 별로 해당 비트만큼 치환
-//        let resultImage = rgbPixelMaker.makebitMixing(imageA: coverImagePixel, imageB: secureImagePixel, bit: bit)
-//        //rgbPixelMaker.printImagefirstByte(coverImagePixel)
-//        //rgbPixelMaker.printImagefirstByte(secureImagePixel)
-//        // coverimageView에 result 넣기
-//        resultImageView.image = rgbPixelMaker.makeMixingImage(rgbData: resultImage, coverImage: coverImageView.image!)
-//        //rgbPixelMaker.printImagefirstByte(resultImage)
-//    }
     
 
     // imageView 누르면 AlertAction 열림
@@ -256,11 +234,9 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
     
     func imagePickerDidEnd() {
         if !flagOfImageView {
-//            coverImagePixel = rgbPixelMaker.makeBinaryPixel(image: coverImageView.image!)
             flagOfImageView = true
             print("cover")
         } else {
-//            secureImagePixel = rgbPixelMaker.makeBinaryPixel(image: secureImageView.image!)
             flagOfImageView = false
             print("secure")
         }
