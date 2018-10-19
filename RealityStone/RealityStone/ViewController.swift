@@ -158,7 +158,9 @@ class ViewController: UIViewController {
         let region = MTLRegionMake2D(0, 0, texture.width, texture.height)
         texture.getBytes(&src, bytesPerRow: bytesPerRow, from: region, mipmapLevel: 0)
         
-        let bitmapInfo = CGBitmapInfo(rawValue: (CGBitmapInfo.byteOrder32Big.rawValue | CGImageAlphaInfo.premultipliedLast.rawValue))
+//        let bitmapInfo = CGBitmapInfo(rawValue: (CGBitmapInfo.byteOrder32Big.rawValue | CGImageAlphaInfo.premultipliedLast.rawValue))
+        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedFirst.rawValue)
+            .union(.byteOrder32Little)
         
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         let bitsPerComponent = 8
