@@ -17,6 +17,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var secureImageView: UIImageView!
     @IBOutlet weak var resultImageView: UIImageView!
+    var cover: UIImage!
+    var secure: UIImage!
     
     private var imagePicker = UIImagePickerController()
     @IBAction func changeButton(_ sender: Any) {
@@ -103,7 +105,7 @@ class ViewController: UIViewController {
     }()
     
     func importTexture() {
-        guard let image = UIImage(named: "bass") else {
+        guard let image = cover else {
             fatalError("Can't read image")
         }
         inTexture = texture(from: image)
@@ -242,9 +244,11 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
         }
         if !flagOfImageView {
             coverImageView.image = image
+            cover = image
 
         } else {
             secureImageView.image = image
+            secure = image
 
         }
         dismiss(animated: true, completion: imagePickerDidEnd)
