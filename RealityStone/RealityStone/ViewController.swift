@@ -31,9 +31,12 @@ class ViewController: UIViewController {
             
             let finalResult = self.image(from: self.outTexture)
             DispatchQueue.main.async {
-                self.resultImageView.image = finalResult
+//                self.resultImageView.image = finalResult
+                ImageInformation.shared.image = finalResult
             }
-            
+            if let resultViewController = self.storyboard?.instantiateViewController(withIdentifier: "ResultViewController") {
+                self.present(resultViewController, animated: true, completion: nil)
+            }
         }
     }
     
