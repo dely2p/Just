@@ -1,8 +1,8 @@
 //
-//  ViewController.swift
-//  Just
+//  ExtractViewController.swift
+//  RealityStone
 //
-//  Created by dely on 2018. 5. 16..
+//  Created by dely on 2018. 10. 21..
 //  Copyright © 2018년 dely. All rights reserved.
 //
 
@@ -10,19 +10,13 @@ import UIKit
 import Metal
 import MetalKit
 
-class MakeViewController: UIViewController {
+class ExtractViewController: UIViewController {
 
-    var pixelSize: UInt = 60
-    var flagOfImageView = false
-    @IBOutlet weak var coverImageView: UIImageView!
-    @IBOutlet weak var secureImageView: UIImageView!
-    @IBOutlet weak var resultImageView: UIImageView!
-    var cover: UIImage!
-    var secure: UIImage!
-    
+    @IBOutlet weak var mixImageView: UIImageView!
+    var mix: UIImage!
     private var imagePicker = UIImagePickerController()
+    
     @IBAction func changeButton(_ sender: Any) {
-        
         queue.async { () -> Void in
             
             self.importTexture()
@@ -31,7 +25,6 @@ class MakeViewController: UIViewController {
             
             let finalResult = self.image(from: self.outTexture)
             DispatchQueue.main.async {
-//                self.resultImageView.image = finalResult
                 ImageInformation.shared.image = finalResult
             }
             if let resultViewController = self.storyboard?.instantiateViewController(withIdentifier: "ResultViewController") {
@@ -58,7 +51,6 @@ class MakeViewController: UIViewController {
     }()
     
     var inTexture: MTLTexture!
-    var inTexture2: MTLTexture!
     var outTexture: MTLTexture!
     let bytesPerPixel: Int = 4
     
@@ -67,26 +59,23 @@ class MakeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let mixTapGesture = UITapGestureRecognizer(target: self, action: #selector(openAlertActionTouched(tapGestureRecognizer:)))
         
-        let coverTapGesture = UITapGestureRecognizer(target: self, action: #selector(openAlertActionTouched(tapGestureRecognizer:)))
-        let secureTapGesture = UITapGestureRecognizer(target: self, action: #selector(openAlertActionTouched(tapGestureRecognizer:)))
-        coverImageView.isUserInteractionEnabled = true
-        coverImageView.addGestureRecognizer(coverTapGesture)
-        secureImageView.isUserInteractionEnabled = true
-        secureImageView.addGestureRecognizer(secureTapGesture)
+        mixImageView.isUserInteractionEnabled = true
+        mixImageView.addGestureRecognizer(mixTapGesture)
         imagePicker.delegate = self
         
         queue.async {
             self.setUpMetal()
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
     func setUpMetal() {
-        if let kernelFunction = defaultLibrary.makeFunction(name: "pixelate") {
+        if let kernelFunction = defaultLibrary.makeFunction(name: "pixelate2") {
             do {
                 pipelineState = try device.makeComputePipelineState(function: kernelFunction)
                 print("pipeline init")
@@ -104,14 +93,10 @@ class MakeViewController: UIViewController {
     }()
     
     func importTexture() {
-        guard let image = cover else {
-            fatalError("Can't read image")
-        }
-        guard let image2 = secure else {
+        guard let image = mix else {
             fatalError("Can't read image")
         }
         inTexture = texture(from: image)
-        inTexture2 = texture(from: image2)
     }
     
     func applyFilter() {
@@ -129,8 +114,7 @@ class MakeViewController: UIViewController {
         
         commandEncoder.setComputePipelineState(pState)
         commandEncoder.setTexture(inTexture, index: 0)
-        commandEncoder.setTexture(inTexture2, index: 1)
-        commandEncoder.setTexture(outTexture, index: 2)
+        commandEncoder.setTexture(outTexture, index: 1)
         
         commandEncoder.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
         commandEncoder.endEncoding()
@@ -167,7 +151,7 @@ class MakeViewController: UIViewController {
         let region = MTLRegionMake2D(0, 0, texture.width, texture.height)
         texture.getBytes(&src, bytesPerRow: bytesPerRow, from: region, mipmapLevel: 0)
         
-//        let bitmapInfo = CGBitmapInfo(rawValue: (CGBitmapInfo.byteOrder32Big.rawValue | CGImageAlphaInfo.premultipliedLast.rawValue))
+        //        let bitmapInfo = CGBitmapInfo(rawValue: (CGBitmapInfo.byteOrder32Big.rawValue | CGImageAlphaInfo.premultipliedLast.rawValue))
         let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedFirst.rawValue)
             .union(.byteOrder32Little)
         
@@ -186,7 +170,7 @@ class MakeViewController: UIViewController {
         return UIImage(cgImage: dstImageFilter!, scale: 0.0, orientation: UIImage.Orientation.up)
     }
     
-
+    
     // imageView 누르면 AlertAction 열림
     @objc func openAlertActionTouched(tapGestureRecognizer: UITapGestureRecognizer) {
         print("imageView clicked")
@@ -226,39 +210,52 @@ class MakeViewController: UIViewController {
             print("not Available")
         }
     }
+
 }
 
-extension MakeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension ExtractViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         // Local variable inserted by Swift 4.2 migrator.
         let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
-
+        
         guard let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.editedImage)] as? UIImage else {
             return
         }
-        if !flagOfImageView {
-            coverImageView.image = image
-            cover = image
-
-        } else {
-            secureImageView.image = image
-            secure = image
-
-        }
-        dismiss(animated: true, completion: imagePickerDidEnd)
+        
+        mixImageView.image = image
+        mix = image
+        
+        dismiss(animated: true, completion: nil)
     }
     
-    func imagePickerDidEnd() {
-        if !flagOfImageView {
-            flagOfImageView = true
-            print("cover")
-        } else {
-            flagOfImageView = false
-            print("secure")
-        }
-    }
-
+//    func imagePickerDidEnd() {
+//        if !flagOfImageView {
+//            flagOfImageView = true
+//            print("cover")
+//        } else {
+//            flagOfImageView = false
+//            print("secure")
+//        }
+//    }
+    
 }
+
+extension UIImage {
+    func renderResizedImage (newWidth: CGFloat) -> UIImage {
+        let scale = newWidth / self.size.width
+        let newHeight = self.size.height * scale
+        let newSize = CGSize(width: newWidth, height: newHeight)
+        
+        let renderer = UIGraphicsImageRenderer(size: newSize)
+        
+        let image = renderer.image { (context) in
+            self.draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: newSize))
+        }
+        return image
+    }
+}
+
+
 
 // Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {

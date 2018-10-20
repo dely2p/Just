@@ -24,3 +24,15 @@ kernel void pixelate(texture2d<float, access::read> inTexture [[texture(0)]],
     outTexture.write(outputColor, gid);
 }
 
+kernel void pixelate2(texture2d<float, access::read> inTexture [[texture(0)]],
+                     texture2d<float, access::write> outTexture [[texture(1)]],
+                     uint2 gid [[thread_position_in_grid]]){
+    
+    const float4 colorAtPixel = inTexture.read(gid);
+    const int bit = 7;
+    const float r = rotate(colorAtPixel.r, bit);
+    const float g = rotate(colorAtPixel.g, bit);
+    const float b = rotate(colorAtPixel.b, bit);
+    const float4 outputColor = float4(r, g, b, 1.0);
+    outTexture.write(outputColor, gid);
+}

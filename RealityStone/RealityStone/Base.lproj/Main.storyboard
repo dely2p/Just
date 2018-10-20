@@ -32,7 +32,10 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.75354449565597359" green="0.72562611119494302" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="tintColor" red="0.96935339168589951" green="1" blue="0.955371168052086" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="extract"/>
+                                <state key="normal" title="Extract"/>
+                                <connections>
+                                    <segue destination="8cU-cM-vaj" kind="show" id="fYg-Vb-0iI"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -43,6 +46,51 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="81H-PO-LGc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="232.80000000000001" y="132.68365817091455"/>
+        </scene>
+        <!--Extract View Controller-->
+        <scene sceneID="emn-Ow-qve">
+            <objects>
+                <viewController id="8cU-cM-vaj" customClass="ExtractViewController" customModule="RealityStone" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sXc-48-fvJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="ucj-Bx-XaD">
+                                <rect key="frame" x="50" y="114" width="275" height="335"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9Dt-q3-FZl">
+                                        <rect key="frame" x="0.0" y="0.0" width="275" height="275"/>
+                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="9Dt-q3-FZl" secondAttribute="height" multiplier="1:1" id="bGp-91-tbc"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GZO-MW-8wJ">
+                                        <rect key="frame" x="0.0" y="305" width="275" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="changeButton:" destination="8cU-cM-vaj" eventType="touchUpInside" id="0hz-PY-gfb"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ucj-Bx-XaD" firstAttribute="leading" secondItem="9rj-BG-7Sc" secondAttribute="leading" constant="50" id="fW6-Yh-XJR"/>
+                            <constraint firstItem="ucj-Bx-XaD" firstAttribute="top" secondItem="9rj-BG-7Sc" secondAttribute="top" constant="50" id="k6G-op-0eH"/>
+                            <constraint firstItem="ucj-Bx-XaD" firstAttribute="centerX" secondItem="sXc-48-fvJ" secondAttribute="centerX" id="qh1-Ts-6PP"/>
+                            <constraint firstItem="9rj-BG-7Sc" firstAttribute="trailing" secondItem="ucj-Bx-XaD" secondAttribute="trailing" constant="50" id="sLK-RA-2zH"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="9rj-BG-7Sc"/>
+                    </view>
+                    <connections>
+                        <outlet property="mixImageView" destination="9Dt-q3-FZl" id="Wam-c5-bmC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B2P-xL-pXH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1076" y="910"/>
         </scene>
         <!--Make View Controller-->
         <scene sceneID="tne-QT-ifu">

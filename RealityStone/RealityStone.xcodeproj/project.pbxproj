@@ -16,6 +16,7 @@
 		A34410C4217BA29700013DD5 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34410C3217BA29700013DD5 /* ResultViewController.swift */; };
 		A34410C6217BA40000013DD5 /* ImageInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34410C5217BA40000013DD5 /* ImageInformation.swift */; };
 		A34410C8217BACB200013DD5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34410C7217BACB200013DD5 /* ViewController.swift */; };
+		A34410CA217BB15E00013DD5 /* ExtractViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34410C9217BB15E00013DD5 /* ExtractViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		A34410C3217BA29700013DD5 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		A34410C5217BA40000013DD5 /* ImageInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInformation.swift; sourceTree = "<group>"; };
 		A34410C7217BACB200013DD5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A34410C9217BB15E00013DD5 /* ExtractViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtractViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				A34410C3217BA29700013DD5 /* ResultViewController.swift */,
 				A34410C5217BA40000013DD5 /* ImageInformation.swift */,
 				A34410C7217BACB200013DD5 /* ViewController.swift */,
+				A34410C9217BB15E00013DD5 /* ExtractViewController.swift */,
 			);
 			path = RealityStone;
 			sourceTree = "<group>";
@@ -149,6 +152,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A34410C8217BACB200013DD5 /* ViewController.swift in Sources */,
+				A34410CA217BB15E00013DD5 /* ExtractViewController.swift in Sources */,
 				A32CB89120ABDE2400D19F57 /* MakeViewController.swift in Sources */,
 				A31400E02179A01F00BC6506 /* Kernels.metal in Sources */,
 				A32CB88F20ABDE2400D19F57 /* AppDelegate.swift in Sources */,
