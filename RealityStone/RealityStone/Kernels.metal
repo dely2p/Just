@@ -16,7 +16,11 @@ kernel void pixelate(texture2d<float, access::read> inTexture [[texture(0)]],
     
     const float4 colorAtPixel = inTexture.read(gid);
     const float4 colorAtPixel2 = inTexture2.read(gid);
-    const float4 outputColor = float4(colorAtPixel.r, colorAtPixel.g, colorAtPixel.b, 0.6);
+    const int bit = 1;
+    const float r = mix(colorAtPixel2.r, colorAtPixel.r, bit);
+    const float g = mix(colorAtPixel2.g, colorAtPixel.g, bit);
+    const float b = mix(colorAtPixel2.b, colorAtPixel.b, bit);
+    const float4 outputColor = float4(r, g, b, 1.0);
     outTexture.write(outputColor, gid);
 }
 

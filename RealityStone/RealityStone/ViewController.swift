@@ -207,6 +207,7 @@ class ViewController: UIViewController {
             imagePicker.sourceType = .photoLibrary
             imagePicker.allowsEditing = true
             imagePicker.delegate = self
+            
             present(imagePicker, animated: true, completion: nil)
         }
     }
