@@ -13,6 +13,7 @@
 		A32CB89420ABDE2400D19F57 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A32CB89220ABDE2400D19F57 /* Main.storyboard */; };
 		A32CB89620ABDE2500D19F57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A32CB89520ABDE2500D19F57 /* Assets.xcassets */; };
 		A32CB89920ABDE2500D19F57 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A32CB89720ABDE2500D19F57 /* LaunchScreen.storyboard */; };
+		A34410C4217BA29700013DD5 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34410C3217BA29700013DD5 /* ResultViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		A32CB89520ABDE2500D19F57 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A32CB89820ABDE2500D19F57 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A32CB89A20ABDE2500D19F57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A34410C3217BA29700013DD5 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				A32CB89720ABDE2500D19F57 /* LaunchScreen.storyboard */,
 				A32CB89A20ABDE2500D19F57 /* Info.plist */,
 				A31400DF2179A01F00BC6506 /* Kernels.metal */,
+				A34410C3217BA29700013DD5 /* ResultViewController.swift */,
 			);
 			path = RealityStone;
 			sourceTree = "<group>";
@@ -142,6 +145,7 @@
 				A32CB89120ABDE2400D19F57 /* ViewController.swift in Sources */,
 				A31400E02179A01F00BC6506 /* Kernels.metal in Sources */,
 				A32CB88F20ABDE2400D19F57 /* AppDelegate.swift in Sources */,
+				A34410C4217BA29700013DD5 /* ResultViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
