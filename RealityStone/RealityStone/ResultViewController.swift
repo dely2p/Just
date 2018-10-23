@@ -9,7 +9,14 @@
 import UIKit
 
 class ResultViewController: UIViewController {
+    private var realImage: UIImage!
     @IBOutlet weak var resultImageView: UIImageView!
+    
+    @IBAction func saveButton(_ sender: Any) {
+        if let image = resultImageView.image {
+            UIImageWriteToSavedPhotosAlbum(image, self, nil, nil)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
