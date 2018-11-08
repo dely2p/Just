@@ -17,28 +17,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="32V-0w-KD0">
-                                <rect key="frame" x="102" y="128" width="184" height="94"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="0.89433101231961687" blue="0.58015469465388692" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Make"/>
-                                <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="OvG-hb-3P7"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAd-GL-cjn">
-                                <rect key="frame" x="104" y="274" width="184" height="94"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.75354449565597359" green="0.72562611119494302" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <color key="tintColor" red="0.96935339168589951" green="1" blue="0.955371168052086" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Extract"/>
-                                <connections>
-                                    <segue destination="8cU-cM-vaj" kind="show" id="fYg-Vb-0iI"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="4s9-7v-QE1">
+                                <rect key="frame" x="50" y="114" width="275" height="110"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="32V-0w-KD0">
+                                        <rect key="frame" x="0.0" y="0.0" width="275" height="30"/>
+                                        <color key="backgroundColor" red="1" green="0.89433101231961687" blue="0.58015469465388692" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="Make"/>
+                                        <connections>
+                                            <segue destination="BYZ-38-t0r" kind="show" id="OvG-hb-3P7"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAd-GL-cjn">
+                                        <rect key="frame" x="0.0" y="80" width="275" height="30"/>
+                                        <color key="backgroundColor" red="0.75354449565597359" green="0.72562611119494302" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="tintColor" red="0.96935339168589951" green="1" blue="0.955371168052086" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="Extract"/>
+                                        <connections>
+                                            <segue destination="8cU-cM-vaj" kind="show" id="fYg-Vb-0iI"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="HYy-aj-UlP" firstAttribute="trailing" secondItem="4s9-7v-QE1" secondAttribute="trailing" constant="50" id="c1n-ey-KWK"/>
+                            <constraint firstItem="4s9-7v-QE1" firstAttribute="leading" secondItem="HYy-aj-UlP" secondAttribute="leading" constant="50" id="fcG-wG-Kpe"/>
+                            <constraint firstItem="4s9-7v-QE1" firstAttribute="top" secondItem="HYy-aj-UlP" secondAttribute="top" constant="50" id="ydq-ed-8Qp"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="HYy-aj-UlP"/>
                     </view>
                     <navigationItem key="navigationItem" id="knJ-oX-tKM"/>
@@ -90,7 +98,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B2P-xL-pXH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1076" y="910"/>
+            <point key="canvasLocation" x="1076" y="908"/>
         </scene>
         <!--Make View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -153,32 +161,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y10-0L-2rL">
-                                <rect key="frame" x="50" y="70" width="275" height="275"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="Y10-0L-2rL" secondAttribute="height" multiplier="1:1" id="Nqm-4o-fu1"/>
-                                </constraints>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lH4-MT-ubh">
-                                <rect key="frame" x="128" y="478" width="118" height="55"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="0.74877609560000002" blue="0.27128778479999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="save"/>
-                                <connections>
-                                    <action selector="saveButton:" destination="p39-bZ-x1V" eventType="touchUpInside" id="EgX-IU-uCD"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Tgx-xq-IBp">
+                                <rect key="frame" x="50" y="70" width="275" height="365"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y10-0L-2rL">
+                                        <rect key="frame" x="0.0" y="0.0" width="275" height="275"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Y10-0L-2rL" secondAttribute="height" multiplier="1:1" id="Nqm-4o-fu1"/>
+                                        </constraints>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ej3-Lc-9jb">
+                                        <rect key="frame" x="0.0" y="295" width="275" height="70"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lH4-MT-ubh">
+                                                <rect key="frame" x="0.0" y="0.0" width="275" height="30"/>
+                                                <color key="backgroundColor" red="1" green="0.74877609560000002" blue="0.27128778479999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <state key="normal" title="save"/>
+                                                <connections>
+                                                    <action selector="saveButton:" destination="p39-bZ-x1V" eventType="touchUpInside" id="EgX-IU-uCD"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GKA-Oh-gnb">
+                                                <rect key="frame" x="0.0" y="40" width="275" height="30"/>
+                                                <color key="backgroundColor" red="1" green="0.19274686639999999" blue="0.099994424900000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <state key="normal" title="Button"/>
+                                                <connections>
+                                                    <action selector="changeButton:" destination="p39-bZ-x1V" eventType="touchUpInside" id="ifU-FB-bgP"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="lH4-MT-ubh" firstAttribute="centerX" secondItem="Ej3-Lc-9jb" secondAttribute="centerX" id="HdE-7w-dFA"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Y10-0L-2rL" firstAttribute="top" secondItem="c07-cN-bqi" secondAttribute="top" constant="50" id="QCJ-Lo-Mah"/>
-                            <constraint firstItem="c07-cN-bqi" firstAttribute="trailing" secondItem="Y10-0L-2rL" secondAttribute="trailing" constant="50" id="gn2-Xb-PNR"/>
-                            <constraint firstItem="Y10-0L-2rL" firstAttribute="leading" secondItem="c07-cN-bqi" secondAttribute="leading" constant="50" id="onA-mf-LFB"/>
+                            <constraint firstItem="Tgx-xq-IBp" firstAttribute="top" secondItem="c07-cN-bqi" secondAttribute="top" constant="50" id="Kn7-5A-NRr"/>
+                            <constraint firstItem="Tgx-xq-IBp" firstAttribute="centerX" secondItem="v87-ov-17m" secondAttribute="centerX" id="nsW-aG-Yl8"/>
+                            <constraint firstItem="c07-cN-bqi" firstAttribute="trailing" secondItem="Tgx-xq-IBp" secondAttribute="trailing" constant="50" id="vd3-eu-eZf"/>
+                            <constraint firstItem="Tgx-xq-IBp" firstAttribute="leading" secondItem="c07-cN-bqi" secondAttribute="leading" constant="50" id="x88-uv-pBK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="c07-cN-bqi"/>
                     </view>
                     <connections>
+                        <outlet property="mix" destination="Y10-0L-2rL" id="7hc-O4-u9u"/>
                         <outlet property="resultImageView" destination="Y10-0L-2rL" id="EpV-JX-C3Q"/>
                     </connections>
                 </viewController>

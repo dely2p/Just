@@ -110,6 +110,16 @@ class MakeViewController: UIViewController {
         guard let image2 = secure else {
             fatalError("Can't read image")
         }
+        let color = image.getPixelColorAtPoint(point: CGPoint(x: 0.0, y: 0.0), sourceView: self.coverImageView)
+        print("cover red: \(color.redValue*255)")
+        print("cover green: \(color.greenValue*255)")
+        print("cover blue: \(color.blueValue*255)")
+        
+        let color2 = image.getPixelColorAtPoint(point: CGPoint(x: 0.0, y: 0.0), sourceView: self.secureImageView)
+        print("secure red: \(color2.redValue*255)")
+        print("secure green: \(color2.greenValue*255)")
+        print("secure blue: \(color2.blueValue*255)")
+        
         inTexture = texture(from: image)
         inTexture2 = texture(from: image2)
     }
