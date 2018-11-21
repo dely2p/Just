@@ -9,52 +9,43 @@
 #include <metal_stdlib>
 using namespace metal;
 
-uint3 floatToBinary(float4 image) {
-    uint r = uint(image.r*255);
-    uint g = uint(image.g*255);
-    uint b = uint(image.b*255);
-    return uint3(r, g, b);
-}
-float binaryToFloat(uint color) {
-    return float(float(color)/255);
+// encode
+uint mixOfImagesByBit(uint imageA, uint imageB){
+    uint bOfImageA = (imageA >> 16) & 0xff;
+    uint gOfImageA = (imageA >> 8) & 0xff;
+    uint rOfImageA = (imageA) & 0xff;
+
+    uint bOfImageB = (uint(imageB) >> 16) & 0xff;
+    uint gOfImageB = (uint(imageB) >> 8) & 0xff;
+    uint rOfImageB = (imageB) & 0xff;
+
+    uint bit = 3;
+
+//    uint newR = insert_bits(rOfImageA, uint(0x00), 0, bit) & 0xff;
+//    uint newG = insert_bits(gOfImageA, uint(0x00), 0, bit) & 0xff;
+//    uint newB = insert_bits(bOfImageA, uint(0x00), 0, bit) & 0xff;
+    
+//    uint newR = insert_bits(rOfImageA, (extract_bits(rOfImageB, 8-bit, bit)), 0, bit) & 0xff;
+//    uint newG = (insert_bits(gOfImageA, (extract_bits(gOfImageB, 8-bit, bit)), 0, bit) + 0b1) & 0xff;
+//    uint newB = (insert_bits(bOfImageA, (extract_bits(bOfImageB, 8-bit, bit)), 0, bit) + 0b11) & 0xff;
+    
+    uint newR = (rOfImageA & (0xff << bit)) | (rOfImageB >> (8-bit));
+    uint newG = (gOfImageA & (0xff << bit)) | ((gOfImageB >> (8-bit+2)));
+    uint newB = (bOfImageA & (0xff << bit)) | ((bOfImageB >> (8-bit+2)));
+
+    return ((uint8_t(0xff) << 24) | (uint8_t(newB) << 16) | (uint8_t(newG) << 8) | (uint8_t(newR)));
 }
 
-uint mixColorBit(uint colorOfA, uint colorOfB, uint bit){
-    uint secureBit = extract_bits(colorOfB & 0xff, uint(8-bit), uint(bit));
-    return insert_bits(colorOfA, secureBit, uint(0), uint(bit));
-}
-
-float3 makeSteganoBit(float4 imageA, float4 imageB, uint bit){
-    // binary 변환
-    uint3 imageAOfBinary = floatToBinary(imageA);
-    uint3 imageBOfBinary = floatToBinary(imageB);
+float4 makeSteganoBit(float4 imageA, float4 imageB){
+    // from float to uint(binary) 변환
+    uint imageAOfBinary = pack_float_to_unorm4x8(imageA);
+    uint imageBOfBinary = pack_float_to_unorm4x8(imageB);
     
     // bit mix
-    uint r = mixColorBit(imageAOfBinary.r, imageBOfBinary.r, bit);
-    uint g = mixColorBit(imageAOfBinary.g, imageBOfBinary.g, bit);
-    uint b = mixColorBit(imageAOfBinary.b, imageBOfBinary.b, bit);
+    uint mixImage = mixOfImagesByBit(imageAOfBinary, imageBOfBinary);
     
     // float 변환
-    return float3(binaryToFloat(r), binaryToFloat(g), binaryToFloat(b));
-}
-
-uint extractColorBit(uint color, uint bit){
-    uint secureBit = extract_bits(color, uint(0), uint(bit));
-    return insert_bits(uint(0), secureBit, uint(8-bit), uint(bit));
-//    return rotate(color, 8-bit);
-}
-
-float3 makeDivBit(float4 image, uint bit){
-    // binary 변환
-    uint3 imageOfBinary = floatToBinary(image);
-    
-    // extract image
-    uint r = extractColorBit(imageOfBinary.r, bit);
-    uint g = extractColorBit(imageOfBinary.g, bit);
-    uint b = extractColorBit(imageOfBinary.b, bit);
-    
-    // float 변환
-    return float3(binaryToFloat(r), binaryToFloat(g), binaryToFloat(b));
+    return unpack_unorm4x8_to_float(mixImage);
 }
 
 kernel void pixelate(texture2d<float, access::read> inTexture [[texture(0)]],
@@ -64,28 +55,45 @@ kernel void pixelate(texture2d<float, access::read> inTexture [[texture(0)]],
     
     const float4 imageA = inTexture.read(gid);
     const float4 imageB = inTexture2.read(gid);
-    const uint bit = 1;
     
-    float3 mixRGB = makeSteganoBit(imageA, imageB, bit);
-//    float3 mixRGB = float3(imageB.r, imageB.g, imageB.b);
+    const float4 mixRGBA = makeSteganoBit(imageA, imageB);
 
-    const float4 outputColor = float4(float3(mixRGB), 1.0);
+    const float4 outputColor = float4(mixRGBA);
     outTexture.write(outputColor, gid);
+}
+
+// decode
+uint extractColorBit(uint image){
+    uint bOfImage = (image >> 16) & 0xff;
+    uint gOfImage = (image >> 8) & 0xff;
+    uint rOfImage = (image) & 0xff;
+    uint bit = 3;
+    
+//    uint newB = extract_bits(bOfImage, 0, bit) << (8-bit);
+//    uint newG = extract_bits(gOfImage, 0, bit) << (8-bit);
+//    uint newR = extract_bits(rOfImage, 0, bit) << (8-bit);
+
+    uint newR = (rOfImage & (0xff >> (8-bit))) << (8-bit);
+    uint newG = (gOfImage & (0xff >> (8-bit))) << (8-bit);
+    uint newB = (bOfImage & (0xff >> (8-bit))) << (8-bit);
+    
+    return ((0xff << 24) | (newB << 16) | (newG << 8) | (newR));
+}
+
+float4 makeDivBit(float4 mixImage){
+    uint imageOfBinary = pack_float_to_unorm4x8(mixImage);
+    
+    uint extractImage = extractColorBit(imageOfBinary);
+    
+    return unpack_unorm4x8_to_float(extractImage);
 }
 
 kernel void pixelate2(texture2d<float, access::read> inTexture [[texture(0)]],
                      texture2d<float, access::write> outTexture [[texture(1)]],
                      uint2 gid [[thread_position_in_grid]]){
     
-    const float4 image = inTexture.read(gid);
-    const int bit = 4;
+    const float4 mixImage = inTexture.read(gid);
     
-    float3 extractRGB = makeDivBit(image, bit);
-    
-//    const float r = extractRGB.r;
-//    const float g = extractRGB.g;
-//    const float b = extractRGB.b;
-    
-    const float4 outputColor = float4(float3(extractRGB), 1.0);
+    const float4 outputColor = makeDivBit(mixImage);
     outTexture.write(outputColor, gid);
 }
