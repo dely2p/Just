@@ -54,9 +54,9 @@ class ResultViewController: UIViewController {
         resultImageView.image = ImageInformation.shared.image
         
         let color = resultImageView.image!.getPixelColorAtPoint(point: CGPoint(x: 0.0, y: 0.0), sourceView: self.resultImageView)
-        print("result red: \(color.redValue*0xff)")
-        print("result green: \(color.greenValue*0xff)")
-        print("result blue: \(color.blueValue*0xff)")
+        print("result red: \(color.redValue*255)")
+        print("result green: \(color.greenValue*255)")
+        print("result blue: \(color.blueValue*255)")
     }
     
     
